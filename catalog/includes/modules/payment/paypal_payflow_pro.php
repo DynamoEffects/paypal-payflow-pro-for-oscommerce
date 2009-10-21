@@ -297,47 +297,24 @@
 
       $result_code = $proArray['RESULT'];
       
-      $RespMsg = '';
-
-      if ($result_code == 1 || $result_code == 26) {
-        $RespMsg = MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_CREDENTIALS;
-      /*
-      } else if ($result_code == 0) {
-
-        if (isset($proArray['AVSADDR'])) {
-          if ($proArray['AVSADDR'] != "Y") {
-            $RespMsg = MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_BILLING_STREET; 
-          }
-        }
-        if (isset($proArray['AVSZIP'])) {
-          if ($proArray['AVSZIP'] != "Y") {
-            $RespMsg = MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_BILLING_ZIP;
-          }
-        }
-        if (isset($proArray['CVV2MATCH'])) {
-          if ($proArray['CVV2MATCH'] != "Y") {
-            $RespMsg = MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_CVV2;
-          }
-        }
-        */
-      } else if ($result_code == 12) {
-        $RespMsg = MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_DECLINED;
-      } else if ($result_code == 13) {
-        $RespMsg = MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_PENDING;
-      } else if ($result_code == 23 || $result_code == 24) {
-        $RespMsg = MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_CC_NUMBER;
-      }
-
-      if ($fraud == 'YES') {
-        if ($result_code == 125) {
-          $RespMsg = MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_DECLINED;
-        } else if ($result_code == 126 || $result_code == 127) {
-          $RespMsg = MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_REVIEW;
-        }
-      }
+      $error_message = '';
       
-      if ($RespMsg != '') {
-        $payment_error_return = 'payment_error=' . $this->code . '&error=' . urldecode($RespMsg);
+      if ($result_code != 0 && defined('MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_' . $result_code)) {
+        $error_message = constant('MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_' . $result_code);
+        
+        if ($proArray['AVSADDR'] != "Y") {
+          $error_message .= "<br /><br />" . MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_AVSADDR;
+        }
+        
+        if ($proArray['AVSZIP'] != "Y") {
+          $error_message .= "<br /><br />" . MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_AVSZIP;
+        }
+        
+        if ($proArray['CVV2MATCH'] != "Y") {
+          $error_message .= "<br /><br />" . MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_CVV2MATCH;
+        }
+
+        $payment_error_return = 'payment_error=' . $this->code . '&error=' . urldecode($error_message);
 
         tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, $payment_error_return, 'SSL', true, false));
         
