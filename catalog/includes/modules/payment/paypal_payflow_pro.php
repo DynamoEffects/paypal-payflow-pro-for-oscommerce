@@ -302,16 +302,16 @@
       if ($result_code != 0 && defined('MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_' . $result_code)) {
         $error_message = constant('MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_' . $result_code);
         
-        if ($proArray['AVSADDR'] != "Y") {
-          $error_message .= "<br /><br />" . MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_AVSADDR;
+        if (isset($proArray['AVSADDR']) && $proArray['AVSADDR'] != "Y") {
+          $error_message .= "  " . MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_AVSADDR;
         }
         
-        if ($proArray['AVSZIP'] != "Y") {
-          $error_message .= "<br /><br />" . MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_AVSZIP;
+        if (isset($proArray['AVSZIP']) && $proArray['AVSZIP'] != "Y") {
+          $error_message .= "  " . MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_AVSZIP;
         }
         
-        if ($proArray['CVV2MATCH'] != "Y") {
-          $error_message .= "<br /><br />" . MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_CVV2MATCH;
+        if (isset($proArray['CVV2MATCH']) && $proArray['CVV2MATCH'] != "Y") {
+          $error_message .= "  " . MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_CVV2MATCH;
         }
 
         $payment_error_return = 'payment_error=' . $this->code . '&error=' . urldecode($error_message);

@@ -24,7 +24,7 @@
   define('MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_9', 'Too many parameters or invalid stream');
   define('MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_10', 'Too many line items');
   define('MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_11', 'Client time-out waiting for response');
-  define('MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_12', 'Declined. Check the credit card number, expiration date, and transaction information to make sure they were entered correctly. If this does not resolve the problem, have the customer call their card issuing bank to resolve.');
+  define('MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_12', 'Declined. Check the credit card number, expiration date, and transaction information to make sure they were entered correctly. If this does not resolve the problem, please call your card issuing bank to resolve the issue.');
   define('MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_13', 'Referral. Transaction cannot be approved electronically but can be approved with a verbal authorization. Contact your merchant bank to obtain an authorization and submit a manual Voice Authorization transaction.');
   define('MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_19', 'Original transaction ID not found. The transaction ID you entered for this transaction is not valid. See RESPMSG');
   define('MODULE_PAYMENT_PAYPAL_PAYFLOW_PRO_TEXT_ERROR_20', 'Cannot find the customer reference number');
