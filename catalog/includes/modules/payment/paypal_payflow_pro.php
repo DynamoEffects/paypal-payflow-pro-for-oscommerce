@@ -323,7 +323,7 @@
       
       $order->info['cc_type'] = $this->cc_type;
       $order->info['cc_owner'] = $order->billing['firstname'] . ' ' . $order->billing['lastname'];
-      $order->info['cc_number'] = $this->cc_number;
+      $order->info['cc_number'] = str_repeat('X', (strlen($this->cc_number) - 4)) . substr($this->cc_number, -4);
       $order->info['cc_expires'] = $this->cc_expires_month . substr($this->cc_expires_year, 2, 2);
 
     }
